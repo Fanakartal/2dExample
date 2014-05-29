@@ -16,11 +16,11 @@ public class PlatformMultiplexer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        /*if (Input.GetKeyDown(KeyCode.Tab))
         {
             clone = Instantiate(this.transform, new Vector3(transform.position.x + 20, transform.position.y, transform.position.z), Quaternion.identity) as GameObject;
             GetComponent<PlatformMultiplexer>().enabled = false;
-        }
+        }*/
     }
 
     void LateUpdate()

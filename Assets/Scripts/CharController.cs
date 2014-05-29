@@ -32,7 +32,13 @@ public class CharController : MonoBehaviour {
         //if (move > 0 && !facingRight) Flip();
        //if (Input.GetKeyDown(KeyCode.Space)) Flip();
         //else if (move < 0 && facingRight) Flip();
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        
+	}
+
+     void Update()
+    {
+        
+         if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
             if(rigidbody2D.gravityScale == 1)
                 rigidbody2D.AddForce(new Vector2(0, jumpForce));
@@ -43,14 +49,8 @@ public class CharController : MonoBehaviour {
             rigidbody2D.gravityScale *= -1;
                
         }
-	}
-
-    /************
-     * void Update()
-    {
-        
     }
-     ************/
+
     //void OnCollisionEnter2D(Collision2D other)
     //{
     //    if (other.gameObject.tag == "DeadEnd")
