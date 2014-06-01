@@ -12,12 +12,16 @@ public class CharController : MonoBehaviour {
     
     public Transform groundCheck;
     public LayerMask whatIsGround;
+
+    GameObject camera;
+    Rigidbody2D cameraRigid;
     
     
     // Use this for initialization
 	void Start () 
     {
-    
+        //yield return new WaitForSeconds(5.0f);
+        //yield return StartCoroutine(WaitABit(5.0f));
 	}
 	
 	// Update is called once per frame
@@ -69,5 +73,31 @@ public class CharController : MonoBehaviour {
         //theScale.y = theScale.y * -1;
         transform.localScale = theScale;
         
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        //GameObject.FindGameObjectWithTag("MainCamera")
+
+        /*if (other.gameObject.tag == "House")
+        {
+            //Destroy(GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>());
+            //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>().enabled = false;
+            camera = GameObject.FindGameObjectWithTag("MainCamera");
+            cameraRigid = camera.GetComponent<Rigidbody2D>();
+            cameraRigid.velocity = new Vector2(0, 0);
+        }
+
+        else
+        {
+        }
+         * */
+    }
+
+    IEnumerator WaitABit(float waitTime)
+    {
+        print("start");
+        yield return new WaitForSeconds(waitTime);
+        print("finish");
     }
 }
