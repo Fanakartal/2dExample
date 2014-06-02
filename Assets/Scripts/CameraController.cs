@@ -28,12 +28,21 @@ public class CameraController : MonoBehaviour
     }
      * *****************************************************
      * **/
-    
-    void LateUpdate () 
+
+    void LateUpdate()
     {
         //print("Player: " + (int)(player.transform.position.x) + ", Camera: " + (int)(transform.position.x));
-        rigidbody2D.velocity = new Vector2(5.9f, rigidbody2D.velocity.y);      
-	}
+        if (player.transform.position.x > 150.0f)
+        {
+            //print("if");
+            rigidbody2D.velocity = new Vector2(0.0f, rigidbody2D.velocity.y);
+        }
+        else
+        {
+            //print("else");
+            rigidbody2D.velocity = new Vector2(5.9f, rigidbody2D.velocity.y);
+        }
+    }
 
     //Vector3 offset = transform.position - lastPos;
     //if (offset.x < threshold)

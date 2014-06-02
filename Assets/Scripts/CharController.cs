@@ -13,7 +13,7 @@ public class CharController : MonoBehaviour {
     public Transform groundCheck;
     public LayerMask whatIsGround;
 
-    GameObject camera;
+    //GameObject camera;
     Rigidbody2D cameraRigid;
     
     
