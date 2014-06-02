@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
         else
         {
             //print("else");
-            rigidbody2D.velocity = new Vector2(5.9f, rigidbody2D.velocity.y);
+            rigidbody2D.velocity = new Vector2(7.9f, rigidbody2D.velocity.y);
         }
     }
 

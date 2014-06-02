@@ -3,9 +3,11 @@ using System.Collections;
 
 public class CharController : MonoBehaviour {
 
-    float maxSpeed = 6f;
+    float maxSpeed = 8.0f;
     float jumpForce = 1000f;
     float groundRadius = 0.2f;
+    float timeToFly = 300.0f;
+    float timePassed;
     
     //bool facingRight = true;
     bool grounded;
@@ -39,10 +41,10 @@ public class CharController : MonoBehaviour {
         
 	}
 
-     void Update()
+    void Update()
     {
         
-         if (grounded && Input.GetKeyDown(KeyCode.Space))
+        if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
             if(rigidbody2D.gravityScale == 1)
                 rigidbody2D.AddForce(new Vector2(0, jumpForce));
@@ -53,6 +55,21 @@ public class CharController : MonoBehaviour {
             rigidbody2D.gravityScale *= -1;
                
         }
+
+        /*if (grounded && rigidbody2D.gravityScale == -1)
+        {
+            //print("yukarıda");
+            timePassed = timePassed + 1.0f;
+            //yield return new WaitForSeconds(5.0f);
+            //yield return StartCoroutine(WaitABit(5.0f));
+            if (timePassed == timeToFly)
+            {
+                rigidbody2D.AddForce(new Vector2(0, -jumpForce));
+                Flip();
+                rigidbody2D.gravityScale *= -1;
+                timePassed = 0.0f;
+            }
+        }*/
     }
 
     //void OnCollisionEnter2D(Collision2D other)
@@ -96,8 +113,8 @@ public class CharController : MonoBehaviour {
 
     IEnumerator WaitABit(float waitTime)
     {
-        print("start");
+        //print("start");
         yield return new WaitForSeconds(waitTime);
-        print("finish");
+        //print("finish");
     }
 }
