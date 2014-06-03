@@ -6,7 +6,7 @@ public class CharController : MonoBehaviour {
     float maxSpeed = 8.0f;
     float jumpForce = 1000f;
     float groundRadius = 0.2f;
-    float timeToFly = 300.0f;
+    float timeToFly = 3.0f;
     float timePassed;
     
     //bool facingRight = true;
@@ -22,6 +22,8 @@ public class CharController : MonoBehaviour {
     // Use this for initialization
 	void Start () 
     {
+        Debug.Log("Time is set.");
+        Time.timeScale = 1;
         //yield return new WaitForSeconds(5.0f);
         //yield return StartCoroutine(WaitABit(5.0f));
 	}
@@ -48,28 +50,29 @@ public class CharController : MonoBehaviour {
         {
             if(rigidbody2D.gravityScale == 1)
                 rigidbody2D.AddForce(new Vector2(0, jumpForce));
-            else
+            else if(rigidbody2D.gravityScale == -1)
                 rigidbody2D.AddForce(new Vector2(0, -jumpForce));
             
             Flip();
             rigidbody2D.gravityScale *= -1;
+            timePassed = 0.0f;
                
         }
 
-        /*if (grounded && rigidbody2D.gravityScale == -1)
+        if (grounded && rigidbody2D.gravityScale == -1)
         {
             //print("yukarıda");
-            timePassed = timePassed + 1.0f;
-            //yield return new WaitForSeconds(5.0f);
-            //yield return StartCoroutine(WaitABit(5.0f));
-            if (timePassed == timeToFly)
+            timePassed = timePassed + Time.deltaTime;// 1.0f;
+            Debug.Log(timePassed);
+
+            if (timePassed >= timeToFly)
             {
                 rigidbody2D.AddForce(new Vector2(0, -jumpForce));
                 Flip();
                 rigidbody2D.gravityScale *= -1;
                 timePassed = 0.0f;
             }
-        }*/
+        }
     }
 
     //void OnCollisionEnter2D(Collision2D other)
@@ -92,10 +95,19 @@ public class CharController : MonoBehaviour {
         
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    IEnumerator OnTriggerEnter2D(Collider2D other)
     {
         //GameObject.FindGameObjectWithTag("MainCamera")
 
+        if (other.gameObject.tag == "House")
+        {
+            print("Starting " + Time.time);
+            yield return StartCoroutine(WaitABit(2.0f));
+            print("Before WaitAndPrint Finishes " + Time.time);
+            yield return StartCoroutine(StopEverything());
+            
+            //Time.timeScale = 0;
+        }
         /*if (other.gameObject.tag == "House")
         {
             //Destroy(GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>());
@@ -116,5 +128,13 @@ public class CharController : MonoBehaviour {
         //print("start");
         yield return new WaitForSeconds(waitTime);
         //print("finish");
+        print("WaitAndPrint " + Time.time);
+    }
+
+    IEnumerator StopEverything()
+    {
+        yield return new WaitForSeconds(0.0f);
+        Time.timeScale = 0.0f;
+        print("Time has stopped.");
     }
 }
