@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 
     public GameObject player;
     public GUIText textGameOver;
-    private Vector3 offset = new Vector3(6, 2, -10);
+    private Vector3 offset = new Vector3(6, 2.35f, -10);
     private float positionDiff;
     //Vector3 lastPos;
     //float threshold = 20.0f;

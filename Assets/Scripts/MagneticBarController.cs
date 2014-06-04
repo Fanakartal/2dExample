@@ -4,13 +4,19 @@ using System.Collections;
 public class MagneticBarController : MonoBehaviour 
 {
     public Texture2D image;
+
+    float timePassedMag;
+
 	// Use this for initialization
 	void Start () {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
+
+        //GetComponent<CharController>()
 	
 	}
 
