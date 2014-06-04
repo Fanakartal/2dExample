@@ -14,9 +14,10 @@ public class CharController : MonoBehaviour {
     
     public Transform groundCheck;
     public LayerMask whatIsGround;
+    public GUIText textYouWon;
 
     //GameObject camera;
-    Rigidbody2D cameraRigid;
+    //Rigidbody2D cameraRigid;
     
     
     // Use this for initialization
@@ -24,6 +25,7 @@ public class CharController : MonoBehaviour {
     {
         Debug.Log("Time is set.");
         Time.timeScale = 1;
+        textYouWon.enabled = false;
         //yield return new WaitForSeconds(5.0f);
         //yield return StartCoroutine(WaitABit(5.0f));
 	}
@@ -32,15 +34,15 @@ public class CharController : MonoBehaviour {
 	void FixedUpdate () 
     {
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-        /*float move = -(transform.position.x);*/ //Input.GetAxis("Horizontal");
-
         rigidbody2D.velocity = new Vector2(/*move * */ maxSpeed, rigidbody2D.velocity.y);
 
 
+        /*float move = -(transform.position.x);*/
+        //Input.GetAxis("Horizontal");
+
         //if (move > 0 && !facingRight) Flip();
-       //if (Input.GetKeyDown(KeyCode.Space)) Flip();
-        //else if (move < 0 && facingRight) Flip();
-        
+        //if (Input.GetKeyDown(KeyCode.Space)) Flip();
+        //else if (move < 0 && facingRight) Flip();    
 	}
 
     void Update()
@@ -73,6 +75,8 @@ public class CharController : MonoBehaviour {
                 timePassed = 0.0f;
             }
         }
+
+        //Debug.Log(rigidbody2D.velocity.x);
     }
 
     //void OnCollisionEnter2D(Collision2D other)
@@ -87,10 +91,7 @@ public class CharController : MonoBehaviour {
         //facingRight = !facingRight;
         
         Vector3 theScale = transform.localScale;
-        
         theScale.y = theScale.y * -1;
-
-        //theScale.y = theScale.y * -1;
         transform.localScale = theScale;
         
     }
@@ -101,13 +102,15 @@ public class CharController : MonoBehaviour {
 
         if (other.gameObject.tag == "House")
         {
+            textYouWon.enabled = true;
             print("Starting " + Time.time);
             yield return StartCoroutine(WaitABit(2.0f));
             print("Before WaitAndPrint Finishes " + Time.time);
             yield return StartCoroutine(StopEverything());
-            
-            //Time.timeScale = 0;
+
+            Application.LoadLevel(0);
         }
+
         /*if (other.gameObject.tag == "House")
         {
             //Destroy(GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>());
@@ -125,9 +128,9 @@ public class CharController : MonoBehaviour {
 
     IEnumerator WaitABit(float waitTime)
     {
-        //print("start");
+
         yield return new WaitForSeconds(waitTime);
-        //print("finish");
+
         print("WaitAndPrint " + Time.time);
     }
 
