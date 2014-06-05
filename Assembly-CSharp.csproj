@@ -49,7 +49,6 @@
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\CharController.cs" />
      <Compile Include="Assets\Scripts\DeadEndMultiplexer.cs" />
-     <Compile Include="Assets\Scripts\MagneticBarController.cs" />
      <Compile Include="Assets\Scripts\PlatformMultiplexer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

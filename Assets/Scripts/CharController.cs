@@ -13,6 +13,7 @@ public class CharController : MonoBehaviour {
     bool grounded;
     
     public Transform groundCheck;
+    public Texture2D image;
     public LayerMask whatIsGround;
     public GUIText textYouWon;
 
@@ -85,6 +86,32 @@ public class CharController : MonoBehaviour {
     //        Destroy(other.gameObject);
     //}
 
+    void OnGUI()
+    {
+        if (timePassed > 0.0f && timePassed < 1.05f)
+        {
+            GUI.Box(new Rect(1520, 0, 50, 50), image);
+            GUI.Box(new Rect(1480, 0, 50, 50), image);
+            GUI.Box(new Rect(1440, 0, 50, 50), image);
+        }
+        else if (timePassed > 1.05f && timePassed < 2.05f)
+        {
+            GUI.Box(new Rect(1480, 0, 50, 50), image);
+            GUI.Box(new Rect(1440, 0, 50, 50), image);
+        }
+        else if (timePassed > 2.05f && timePassed < 3.05f)
+        {
+            GUI.Box(new Rect(1440, 0, 50, 50), image);
+        }
+
+        else
+        {
+            GUI.Box(new Rect(1520, 0, 50, 50), image);
+            GUI.Box(new Rect(1480, 0, 50, 50), image);
+            GUI.Box(new Rect(1440, 0, 50, 50), image);
+        }
+    }
+    
     void Flip()
     {
         //transform.rotation *= Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 180);
