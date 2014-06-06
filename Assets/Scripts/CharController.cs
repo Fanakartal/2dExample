@@ -8,6 +8,7 @@ public class CharController : MonoBehaviour {
     float groundRadius = 0.2f;
     float timeToFly = 3.0f;
     float timePassed;
+    int collidedWithEnemy;
     
     //bool facingRight = true;
     bool grounded;
@@ -16,14 +17,11 @@ public class CharController : MonoBehaviour {
     public Texture2D image;
     public LayerMask whatIsGround;
     public GUIText textYouWon;
-
-    //GameObject camera;
-    //Rigidbody2D cameraRigid;
-    
-    
+   
     // Use this for initialization
 	void Start () 
     {
+        collidedWithEnemy = 0;
         Debug.Log("Time is set.");
         Time.timeScale = 1;
         textYouWon.enabled = false;
@@ -32,7 +30,40 @@ public class CharController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+    void Update()
+    {
+        if (collidedWithEnemy == 0)
+        {
+            if (grounded && Input.GetKeyDown(KeyCode.Space))
+            {
+                if (rigidbody2D.gravityScale == 1)
+                    rigidbody2D.AddForce(new Vector2(0, jumpForce));
+                else if (rigidbody2D.gravityScale == -1)
+                    rigidbody2D.AddForce(new Vector2(0, -jumpForce));
+
+                Flip();
+                rigidbody2D.gravityScale *= -1;
+                timePassed = 0.0f;
+            }
+
+            if (grounded && rigidbody2D.gravityScale == -1)
+            {
+                //print("yukarıda");
+                timePassed = timePassed + Time.deltaTime;// 1.0f;
+                Debug.Log(timePassed);
+
+                if (timePassed >= timeToFly)
+                {
+                    rigidbody2D.AddForce(new Vector2(0, -jumpForce));
+                    Flip();
+                    rigidbody2D.gravityScale *= -1;
+                    timePassed = 0.0f;
+                }
+            }
+        }
+    }
+    
+    void FixedUpdate () 
     {
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
         rigidbody2D.velocity = new Vector2(/*move * */ maxSpeed, rigidbody2D.velocity.y);
@@ -46,39 +77,7 @@ public class CharController : MonoBehaviour {
         //else if (move < 0 && facingRight) Flip();    
 	}
 
-    void Update()
-    {
-        
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            if(rigidbody2D.gravityScale == 1)
-                rigidbody2D.AddForce(new Vector2(0, jumpForce));
-            else if(rigidbody2D.gravityScale == -1)
-                rigidbody2D.AddForce(new Vector2(0, -jumpForce));
-            
-            Flip();
-            rigidbody2D.gravityScale *= -1;
-            timePassed = 0.0f;
-               
-        }
-
-        if (grounded && rigidbody2D.gravityScale == -1)
-        {
-            //print("yukarıda");
-            timePassed = timePassed + Time.deltaTime;// 1.0f;
-            Debug.Log(timePassed);
-
-            if (timePassed >= timeToFly)
-            {
-                rigidbody2D.AddForce(new Vector2(0, -jumpForce));
-                Flip();
-                rigidbody2D.gravityScale *= -1;
-                timePassed = 0.0f;
-            }
-        }
-
-        //Debug.Log(rigidbody2D.velocity.x);
-    }
+    
 
     //void OnCollisionEnter2D(Collision2D other)
     //{
@@ -121,6 +120,18 @@ public class CharController : MonoBehaviour {
         theScale.y = theScale.y * -1;
         transform.localScale = theScale;
         
+    }
+
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if (/*other.gameObject.tag == "DeadEnd" ||*/ other.gameObject.tag == "Dog" || other.gameObject.tag == "Dave")
+        {
+            collidedWithEnemy = 1;
+            Debug.Log("Collided with something");
+        }
+
+        //float relativePos = transform.InverseTransformPoint(
+        //float relativePos = transform.InverseTransformPoint(other.contacts);
     }
 
     IEnumerator OnTriggerEnter2D(Collider2D other)
