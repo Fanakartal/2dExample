@@ -6,7 +6,7 @@ public class CharController : MonoBehaviour {
     float maxSpeed = 8.0f;
     float jumpForce = 1000f;
     float groundRadius = 0.2f;
-    float timeToFly = 3.0f;
+    float timeToFly = 2.0f;
     float timePassed;
     int collidedWithEnemy;
     
@@ -87,18 +87,18 @@ public class CharController : MonoBehaviour {
 
     void OnGUI()
     {
-        if (timePassed > 0.0f && timePassed < 1.05f)
+        if (timePassed > 0.0f && timePassed < 0.7f)
         {
             GUI.Box(new Rect(1520, 0, 50, 50), image);
             GUI.Box(new Rect(1480, 0, 50, 50), image);
             GUI.Box(new Rect(1440, 0, 50, 50), image);
         }
-        else if (timePassed > 1.05f && timePassed < 2.05f)
+        else if (timePassed > 0.7f && timePassed < 1.4f)
         {
             GUI.Box(new Rect(1480, 0, 50, 50), image);
             GUI.Box(new Rect(1440, 0, 50, 50), image);
         }
-        else if (timePassed > 2.05f && timePassed < 3.05f)
+        else if (timePassed > 1.4f && timePassed < 2.05f)
         {
             GUI.Box(new Rect(1440, 0, 50, 50), image);
         }
