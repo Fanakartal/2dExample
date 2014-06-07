@@ -32,8 +32,8 @@ public class CharController : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        if (collidedWithEnemy == 0)
-        {
+        //if (collidedWithEnemy == 0)
+        //{
             if (grounded && Input.GetKeyDown(KeyCode.Space))
             {
                 if (rigidbody2D.gravityScale == 1)
@@ -60,7 +60,7 @@ public class CharController : MonoBehaviour {
                     timePassed = 0.0f;
                 }
             }
-        }
+        //}
     }
     
     void FixedUpdate () 
@@ -122,17 +122,16 @@ public class CharController : MonoBehaviour {
         
     }
 
-    void OnCollisionStay2D(Collision2D other)
+    // TODO: Sağdan ya da soldan yani hangi yönden collision olduğu tespit edildiğinde bunu çalıştırabiliriz.
+
+    /*void OnCollisionStay2D(Collision2D other)
     {
-        if (/*other.gameObject.tag == "DeadEnd" ||*/ other.gameObject.tag == "Dog" || other.gameObject.tag == "Dave")
+        if (other.gameObject.tag == "DeadEnd" || other.gameObject.tag == "Dog" || other.gameObject.tag == "Dave")
         {
             collidedWithEnemy = 1;
             Debug.Log("Collided with something");
         }
-
-        //float relativePos = transform.InverseTransformPoint(
-        //float relativePos = transform.InverseTransformPoint(other.contacts);
-    }
+    }*/
 
     IEnumerator OnTriggerEnter2D(Collider2D other)
     {
@@ -146,7 +145,7 @@ public class CharController : MonoBehaviour {
             print("Before WaitAndPrint Finishes " + Time.time);
             yield return StartCoroutine(StopEverything());
 
-            Application.LoadLevel(0);
+            Application.LoadLevel(1);
         }
 
         /*if (other.gameObject.tag == "House")

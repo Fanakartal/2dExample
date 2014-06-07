@@ -8,6 +8,11 @@ public class CameraController : MonoBehaviour
     public GUIText textGameOver;
     private Vector3 offset = new Vector3(6, 2.35f, -10);
     private float positionDiff;
+
+    //AudioSource dogBark;
+    //public AudioClip dogBarkClip;
+
+    //GameObject dog;
     //Vector3 lastPos;
     //float threshold = 20.0f;
 
@@ -59,6 +64,15 @@ public class CameraController : MonoBehaviour
             rigidbody2D.velocity = new Vector2(7.9f, rigidbody2D.velocity.y);
         }     
     }
+
+    /*void Update()
+    {
+        Debug.Log("Dog");
+        dog = GameObject.FindGameObjectWithTag("Dog");
+        //dogBark.clip = dogBarkClip;
+        //dogBark.Play();
+        AudioSource.PlayClipAtPoint(dogBarkClip, dog.transform.position); 
+    }*/
 
     IEnumerator WaitABit(float waitTime)
     {

@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\CharController.cs" />
      <Compile Include="Assets\Scripts\DeadEndMultiplexer.cs" />
+     <Compile Include="Assets\Scripts\DogSoundController.cs" />
      <Compile Include="Assets\Scripts\MenuController.cs" />
      <Compile Include="Assets\Scripts\PlatformMultiplexer.cs" />
   </ItemGroup>
