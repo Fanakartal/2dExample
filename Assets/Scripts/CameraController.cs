@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
 {
 
     public GameObject player;
-    public GUIText textGameOver;
+    //public GUIText textGameOver;
     private Vector3 offset = new Vector3(6, 2.35f, -10);
     private float positionDiff;
 
@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
 
 	void Start () 
     {
-        textGameOver.enabled = false;
+        //textGameOver.enabled = false;
         
         transform.position = player.transform.position + offset;
         positionDiff = transform.position.x - player.transform.position.x;
@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
         //Debug.Log(transform.position.x - player.transform.position.x);
         if ((transform.position.x - player.transform.position.x) >= (positionDiff * 2) + 1.0f)
         {
-            textGameOver.enabled = true;
+            //textGameOver.enabled = true;
             StartCoroutine(WaitAndLoadLevel(3.0f));
             
             //yield return StartCoroutine(StopEverything());
@@ -91,7 +91,7 @@ public class CameraController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         //print("WaitAndPrint " + Time.time);
-        Application.LoadLevel(0);
+        Application.LoadLevel(7);
     }
 
     //Vector3 offset = transform.position - lastPos;

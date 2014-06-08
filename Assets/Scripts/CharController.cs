@@ -8,7 +8,7 @@ public class CharController : MonoBehaviour {
     float groundRadius = 0.2f;
     float timeToFly = 2.0f;
     float timePassed;
-    int collidedWithEnemy;
+    //int collidedWithEnemy;
     
     //bool facingRight = true;
     bool grounded;
@@ -16,17 +16,16 @@ public class CharController : MonoBehaviour {
     public Transform groundCheck;
     public Texture2D image;
     public LayerMask whatIsGround;
-    public GUIText textYouWon;
+    //public GUIText textYouWon;
    
     // Use this for initialization
 	void Start () 
     {
-        collidedWithEnemy = 0;
+        //collidedWithEnemy = 0;
         Debug.Log("Time is set.");
         Time.timeScale = 1;
-        textYouWon.enabled = false;
-        //yield return new WaitForSeconds(5.0f);
-        //yield return StartCoroutine(WaitABit(5.0f));
+        
+        //textYouWon.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -89,6 +88,15 @@ public class CharController : MonoBehaviour {
     {
         if (timePassed > 0.0f && timePassed < 0.7f)
         {
+            //GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), image, ScaleMode.ScaleToFit, true);
+            
+            //GUI.Box(new Rect(Screen.width / 2 - image.width, 0, 50, 50), image);
+            //GUI.Box(new Rect(Screen.width / 2 - (image.width * 2), 0, 50, 50), image);
+            
+            //GUI.Box(new Rect(Screen.width - (Screen.width / 16), 0, 50, 50), image);
+            //GUI.Box(new Rect(Screen.width - ((Screen.width / 16) * 2), 0, 50, 50), image);
+            //GUI.Box(new Rect(Screen.width - ((Screen.width / 16) * 3), 0, 50, 50), image);
+
             GUI.Box(new Rect(1520, 0, 50, 50), image);
             GUI.Box(new Rect(1480, 0, 50, 50), image);
             GUI.Box(new Rect(1440, 0, 50, 50), image);
@@ -139,13 +147,13 @@ public class CharController : MonoBehaviour {
 
         if (other.gameObject.tag == "House")
         {
-            textYouWon.enabled = true;
+            //textYouWon.enabled = true;
             print("Starting " + Time.time);
-            yield return StartCoroutine(WaitABit(2.0f));
-            print("Before WaitAndPrint Finishes " + Time.time);
-            yield return StartCoroutine(StopEverything());
+            yield return StartCoroutine(WaitABit(1.5f));
+            //print("Before WaitAndPrint Finishes " + Time.time);
+            //yield return StartCoroutine(StopEverything());
 
-            Application.LoadLevel(1);
+            Application.LoadLevel(5);
         }
 
         /*if (other.gameObject.tag == "House")

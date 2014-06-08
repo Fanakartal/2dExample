@@ -7,12 +7,13 @@ public class DogSoundController : MonoBehaviour {
 
     //AudioSource dogBarkSource;
 
-    GameObject mainCamera;
+    //GameObject mainCamera;
     
     // Use this for initialization
 	void Start () 
     {
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        //mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        
         //dogBarkSource.clip = dogBarkClip;
 	}
 	
