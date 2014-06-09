@@ -18,6 +18,6 @@ public class LostScreenWaiter : MonoBehaviour {
     {
         yield return new WaitForSeconds(waitTime);
         //print("WaitAndPrint " + Time.time);
-        Application.LoadLevel(1);
+        Application.LoadLevel(0);
     }
 }
