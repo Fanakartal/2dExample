@@ -47,8 +47,7 @@ public class CharController : MonoBehaviour {
 
             if (grounded && rigidbody2D.gravityScale == -1)
             {
-                //print("yukarıda");
-                timePassed = timePassed + Time.deltaTime;// 1.0f;
+                timePassed = timePassed + Time.deltaTime;
                 Debug.Log(timePassed);
 
                 if (timePassed >= timeToFly)
@@ -75,14 +74,6 @@ public class CharController : MonoBehaviour {
         //if (Input.GetKeyDown(KeyCode.Space)) Flip();
         //else if (move < 0 && facingRight) Flip();    
 	}
-
-    
-
-    //void OnCollisionEnter2D(Collision2D other)
-    //{
-    //    if (other.gameObject.tag == "DeadEnd")
-    //        Destroy(other.gameObject);
-    //}
 
     void OnGUI()
     {
@@ -143,32 +134,16 @@ public class CharController : MonoBehaviour {
 
     IEnumerator OnTriggerEnter2D(Collider2D other)
     {
-        //GameObject.FindGameObjectWithTag("MainCamera")
-
         if (other.gameObject.tag == "House")
         {
             //textYouWon.enabled = true;
-            print("Starting " + Time.time);
+            //print("Starting " + Time.time);
             yield return StartCoroutine(WaitABit(1.5f));
             //print("Before WaitAndPrint Finishes " + Time.time);
             //yield return StartCoroutine(StopEverything());
 
             Application.LoadLevel(5);
         }
-
-        /*if (other.gameObject.tag == "House")
-        {
-            //Destroy(GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>());
-            //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>().enabled = false;
-            camera = GameObject.FindGameObjectWithTag("MainCamera");
-            cameraRigid = camera.GetComponent<Rigidbody2D>();
-            cameraRigid.velocity = new Vector2(0, 0);
-        }
-
-        else
-        {
-        }
-         * */
     }
 
     IEnumerator WaitABit(float waitTime)
@@ -176,13 +151,13 @@ public class CharController : MonoBehaviour {
 
         yield return new WaitForSeconds(waitTime);
 
-        print("WaitAndPrint " + Time.time);
+        //print("WaitAndPrint " + Time.time);
     }
 
     IEnumerator StopEverything()
     {
         yield return new WaitForSeconds(0.0f);
         Time.timeScale = 0.0f;
-        print("Time has stopped.");
+        //print("Time has stopped.");
     }
 }

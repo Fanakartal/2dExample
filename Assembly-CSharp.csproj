@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\LostScreenWaiter.cs" />
      <Compile Include="Assets\Scripts\MenuController.cs" />
      <Compile Include="Assets\Scripts\PlatformMultiplexer.cs" />
+     <Compile Include="Assets\Scripts\QuitController.cs" />
      <Compile Include="Assets\Scripts\SoundUnitySingleton.cs" />
      <Compile Include="Assets\Scripts\WinScreenWaiter.cs" />
   </ItemGroup>

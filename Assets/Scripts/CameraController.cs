@@ -14,7 +14,6 @@ public class CameraController : MonoBehaviour
 
     //GameObject dog;
     //Vector3 lastPos;
-    //float threshold = 20.0f;
 
 	void Start () 
     {
@@ -52,15 +51,12 @@ public class CameraController : MonoBehaviour
             //yield return StartCoroutine(StopEverything());
         }
 
-        //print("Player: " + (int)(player.transform.position.x) + ", Camera: " + (int)(transform.position.x));
         if (player.transform.position.x > 150.0f)
         {
-            //print("if");
             rigidbody2D.velocity = new Vector2(0.0f, rigidbody2D.velocity.y);
         }
         else
         {
-            //print("else");
             rigidbody2D.velocity = new Vector2(7.9f, rigidbody2D.velocity.y);
         }     
     }
@@ -93,26 +89,4 @@ public class CameraController : MonoBehaviour
         //print("WaitAndPrint " + Time.time);
         Application.LoadLevel(7);
     }
-
-    //Vector3 offset = transform.position - lastPos;
-    //if (offset.x < threshold)
-    //{
-    //    Debug.Log("if");
-    //    transform.position = player.transform.position + new Vector3(8, 0, -10);
-    //}
-    //else
-    //{
-    //    Debug.Log("else");
-
-    //}
-
-
-    /* if (Vector3.Distance(player.transform.position, transform.position) > 0)
-     {
-         Debug.Log("if");
-         transform.position = player.transform.position + new Vector3(8, 0, -10);
-     }
-     else
-         transform.position = transform.position + new Vector3(8, 0, -10);
-     * */
 }

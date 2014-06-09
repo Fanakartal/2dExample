@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SoundUnitySingleton : MonoBehaviour {
-
-
+public class SoundUnitySingleton : MonoBehaviour 
+{
+    
     private static SoundUnitySingleton instance = null;
 
     private AudioSource backSource;
@@ -14,9 +14,6 @@ public class SoundUnitySingleton : MonoBehaviour {
     {
 
         backSource = gameObject.AddComponent<AudioSource>();
-
-        //if (backSource)
-        //    Destroy(backSource);
 
         if (instance != null && instance != this)
         {
@@ -31,8 +28,6 @@ public class SoundUnitySingleton : MonoBehaviour {
         DontDestroyOnLoad(gameObject);        
     }
 
-
-    
     void Start () 
     {
  
@@ -41,6 +36,17 @@ public class SoundUnitySingleton : MonoBehaviour {
         backSource.audio.Play();        
         
 	}
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (backSource.transform.position.x > 152.5f)
+        {
+            backSourceRigid.velocity = new Vector2(0.0f, rigidbody2D.velocity.y);
+        }
+        else
+            backSourceRigid.velocity = new Vector2(7.9f, rigidbody2D.velocity.y);
+    }
 
     void OnLevelWasLoaded()
     {
@@ -55,15 +61,4 @@ public class SoundUnitySingleton : MonoBehaviour {
             Destroy(backSourceRigid);
         }
     }
-	
-	// Update is called once per frame
-	void Update () 
-    {
-        if (backSource.transform.position.x > 152.5f)
-        {
-            backSourceRigid.velocity = new Vector2(0.0f, rigidbody2D.velocity.y);
-        }
-        else
-            backSourceRigid.velocity = new Vector2(7.9f, rigidbody2D.velocity.y);
-	}
 }
