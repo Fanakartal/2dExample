@@ -1,6 +1,6 @@
 2dExample
 =========
 
-it is a Unity3D Game project called "Flying-Postman". C# is used.
+It is a Unity3D Game project called "Flying-Postman". C# is used.
 
-its version now is demo-v5.
+Its version now is Version Alpha 1.0.
