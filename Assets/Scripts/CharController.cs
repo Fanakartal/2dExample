@@ -8,6 +8,7 @@ public class CharController : MonoBehaviour {
     float groundRadius = 0.2f;
     float timeToFly = 2.0f;
     float timePassed;
+
     //int collidedWithEnemy;
     
     //bool facingRight = true;
@@ -16,6 +17,7 @@ public class CharController : MonoBehaviour {
     public Transform groundCheck;
     public Texture2D image;
     public LayerMask whatIsGround;
+    public GUIStyle guiStyle = new GUIStyle();
     //public GUIText textYouWon;
    
     // Use this for initialization
@@ -24,6 +26,7 @@ public class CharController : MonoBehaviour {
         //collidedWithEnemy = 0;
         Debug.Log("Time is set.");
         Time.timeScale = 1;
+        timePassed = 0.0f;
         
         //textYouWon.enabled = false;
 	}
@@ -33,31 +36,50 @@ public class CharController : MonoBehaviour {
     {
         //if (collidedWithEnemy == 0)
         //{
-            if (grounded && Input.GetKeyDown(KeyCode.Space))
-            {
-                if (rigidbody2D.gravityScale == 1)
-                    rigidbody2D.AddForce(new Vector2(0, jumpForce));
-                else if (rigidbody2D.gravityScale == -1)
-                    rigidbody2D.AddForce(new Vector2(0, -jumpForce));
+        
+        /* Belli bir süre sonra manyetizma bittiği için aşağı düşmemizi sağlayan parçacık */ 
+        if (grounded && rigidbody2D.gravityScale == -1)
+        {
+            timePassed = timePassed + Time.deltaTime;
+            Debug.Log(timePassed);
 
+            if (timePassed >= timeToFly)
+            {
+                rigidbody2D.AddForce(new Vector2(0, -jumpForce));
                 Flip();
                 rigidbody2D.gravityScale *= -1;
-                timePassed = 0.0f;
             }
+        }
 
-            if (grounded && rigidbody2D.gravityScale == -1)
+        /* Yerdeyken manyetizma çubuğunun bir anda değil süreyle dolmasını sağlayan parçacık */
+        if (grounded && rigidbody2D.gravityScale == 1)
+        {
+            if (timePassed > 0.0f * timeToFly)
             {
-                timePassed = timePassed + Time.deltaTime;
                 Debug.Log(timePassed);
-
-                if (timePassed >= timeToFly)
-                {
-                    rigidbody2D.AddForce(new Vector2(0, -jumpForce));
-                    Flip();
-                    rigidbody2D.gravityScale *= -1;
-                    timePassed = 0.0f;
-                }
+                timePassed = timePassed - Time.deltaTime;
             }
+        }    
+        
+        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (rigidbody2D.gravityScale == 1)
+            {
+                // Manyetizma çubuğu tam dolmadan zıplanması istenmiyorsa bu açılır.
+                //if (timePassed < 0.03f)
+                //{
+                rigidbody2D.AddForce(new Vector2(0, jumpForce));
+                Flip();
+                rigidbody2D.gravityScale *= -1;
+                //}
+            }
+            else if (rigidbody2D.gravityScale == -1)
+            {
+                rigidbody2D.AddForce(new Vector2(0, -jumpForce));
+                Flip();
+                rigidbody2D.gravityScale *= -1;
+            }
+        }
         //}
     }
     
@@ -77,36 +99,38 @@ public class CharController : MonoBehaviour {
 
     void OnGUI()
     {
-        if (timePassed > 0.0f && timePassed < 0.7f)
-        {
-            //GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), image, ScaleMode.ScaleToFit, true);
-            
-            //GUI.Box(new Rect(Screen.width / 2 - image.width, 0, 50, 50), image);
-            //GUI.Box(new Rect(Screen.width / 2 - (image.width * 2), 0, 50, 50), image);
-            
-            //GUI.Box(new Rect(Screen.width - (Screen.width / 16), 0, 50, 50), image);
-            //GUI.Box(new Rect(Screen.width - ((Screen.width / 16) * 2), 0, 50, 50), image);
-            //GUI.Box(new Rect(Screen.width - ((Screen.width / 16) * 3), 0, 50, 50), image);
+        guiStyle.fontStyle = FontStyle.Bold;
+        guiStyle.fontSize = 30;
 
-            GUI.Box(new Rect(1520, 0, 50, 50), image);
-            GUI.Box(new Rect(1480, 0, 50, 50), image);
-            GUI.Box(new Rect(1440, 0, 50, 50), image);
-        }
-        else if (timePassed > 0.7f && timePassed < 1.4f)
+        if (timePassed > 0.0f && timePassed < 0.7f /*|| timeGround > 1.4f && timeGround < 2.05f*/)
         {
-            GUI.Box(new Rect(1480, 0, 50, 50), image);
-            GUI.Box(new Rect(1440, 0, 50, 50), image);
+            GUI.Box(new Rect(Screen.width - 210, 0, 180, 50), "");
+            GUI.Label(new Rect(Screen.width - 210, 60, 180, 50), "Magnetism", guiStyle);
+            
+            GUI.Label(new Rect(Screen.width - 150, 0, 50, 50), image);
+            GUI.Label(new Rect(Screen.width - 190, 0, 50, 50), image);
         }
-        else if (timePassed > 1.4f && timePassed < 2.05f)
+        else if (timePassed > 0.7f && timePassed < 1.4f /*|| timeGround > 0.7f && timeGround < 1.4f*/)
         {
-            GUI.Box(new Rect(1440, 0, 50, 50), image);
+            GUI.Box(new Rect(Screen.width - 210, 0, 180, 50), "");
+            GUI.Label(new Rect(Screen.width - 210, 60, 180, 50), "Magnetism", guiStyle);
+            
+            GUI.Label(new Rect(Screen.width - 190, 0, 50, 50), image);
+        }
+        else if (timePassed > 1.4f && timePassed < 2.05f /*|| timeGround > 0.2f && timeGround < 0.7f*/)
+        {
+            GUI.Box(new Rect(Screen.width - 210, 0, 180, 50), "");
+            GUI.Label(new Rect(Screen.width - 210, 60, 180, 50), "Magnetism", guiStyle);
         }
 
         else
         {
-            GUI.Box(new Rect(1520, 0, 50, 50), image);
-            GUI.Box(new Rect(1480, 0, 50, 50), image);
-            GUI.Box(new Rect(1440, 0, 50, 50), image);
+            GUI.Box(new Rect(Screen.width - 210, 0, 180, 50), "");
+            GUI.Label(new Rect(Screen.width - 210, 60, 180, 50), "Magnetism", guiStyle);
+            
+            GUI.Label(new Rect(Screen.width - 110, 0, 50, 50), image);
+            GUI.Label(new Rect(Screen.width - 150, 0, 50, 50), image);
+            GUI.Label(new Rect(Screen.width - 190, 0, 50, 50), image);            
         }
     }
     
