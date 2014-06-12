@@ -39,7 +39,7 @@ public class SoundUnitySingleton : MonoBehaviour
 
     void OnLevelWasLoaded()
     {
-        if (Application.loadedLevel == 2 || Application.loadedLevel == 3 || Application.loadedLevel == 4)
+        if (Application.loadedLevel == 2 || Application.loadedLevel == 3 || Application.loadedLevel == 4 || Application.loadedLevel == 6)
         {
             backSourceRigid = gameObject.AddComponent<Rigidbody2D>();
             backSourceRigid.isKinematic = true;

@@ -27,6 +27,11 @@ public class MenuController : MonoBehaviour {
                 Application.LoadLevel(3);
             if (collider2D.gameObject.tag == "Istanbul")
                 Application.LoadLevel(4);
+            if (collider2D.gameObject.tag == "Secret")
+            {
+                Debug.Log("Secret level tıklandı.");
+                Application.LoadLevel(6);
+            }
             if (collider2D.gameObject.tag == "Back")
                 Application.LoadLevel(0);
         }
@@ -34,11 +39,25 @@ public class MenuController : MonoBehaviour {
 
     void OnMouseOver()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = Color.Lerp(initialColor, Color.cyan, 0.5f);
+        if (collider2D.gameObject.tag == "Secret")
+        {
+            //Do nothing
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.Lerp(initialColor, Color.cyan, 0.5f);
+        }
     }
 
     void OnMouseExit()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = initialColor;
+        if (collider2D.gameObject.tag == "Secret")
+        {
+            //Do nothing
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = initialColor;
+        }
     }
 }
