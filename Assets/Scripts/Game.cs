@@ -6,11 +6,13 @@ public class _Game
 { //don't need ": Monobehaviour" because we are not attaching it to a game object
 
     public static _Game current;
-    public _Character postman;
+    //public _Character postman;
+    public int currScene;
 
     public _Game()
     {
-        postman = new _Character();
+        //postman = new _Character();
+        this.currScene = 0;
     }
 
 }

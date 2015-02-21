@@ -23,6 +23,12 @@ public class CharController : MonoBehaviour {
     // Use this for initialization
 	void Start () 
     {
+
+        /* SaveLoad */
+        //_SaveLoad.savedGames.RemoveAll(_Game);
+        _Game.current.currScene = Application.loadedLevel;
+        Debug.Log(_Game.current.currScene);
+
         //collidedWithEnemy = 0;
         Debug.Log("Time is set.");
         Time.timeScale = 1;
@@ -34,6 +40,14 @@ public class CharController : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
+
+        /* SaveLoad */
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _SaveLoad.Save();
+            Application.LoadLevel(8);
+        }
+        
         //if (collidedWithEnemy == 0)
         //{
         
